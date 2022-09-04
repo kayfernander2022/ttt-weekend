@@ -35,11 +35,12 @@ let board = [], turn, winner;
 /*-------------------------------- Functions --------------------------------*/
 //init() // need an initialize function
 function init(){
-  board = [1, null, -1, -1, 1, null, 1, -1, null];
+  board = [null, null, null, null, null, null, null, null, null];
   turn = 1;
   winner = null;
   render();
-  getMessage(winner);
+  getMessage();
+  Object.values(squareEls).forEach((s) => s.addEventListener('click', handleClick));
 }
 
 function render(){
@@ -64,12 +65,10 @@ function render(){
   });
 }
 
-
-
-function getMessage(win){
-  let newMessage = win === null ? 
-  `It is now player ${getNextTurn() === 1 ? 'X' : 'O'} turn` : win === '1' ?
-  'Player X has won' : win === '-1' ? 'Player O has won' : 'There is a tie';
+function getMessage(){
+  let newMessage = winner === null ? 
+  `It is now player ${turn === 1 ? 'X' : 'O'} turn` : winner === '1' ?
+  'Player X has won' : winner === '-1' ? 'Player O has won' : 'There is a tie';
 
   messageEl.innerText = newMessage;
 }
@@ -77,6 +76,60 @@ function getMessage(win){
 function getNextTurn(){ 
   turn = turn * -1;
   return turn;
+}
+
+function handleClick(evt){
+  const sqIdx = evt.target.id.replace('sq', '');
+  
+  if(board[sqIdx] !== null){
+    return;
+  }
+
+  board[sqIdx] = turn;
+  render();
+
+  winner = getWinner();
+  
+  if(winner !== null){
+    getMessage();
+    return;
+  }
+
+  getNextTurn();
+  getMessage();
+
+  console.log(`Event was clicked ${sqIdx}`);
+  console.log(`choice at ${sqIdx} is ${board[sqIdx]}`)
+}
+
+function getWinner(){
+  let player1 = 0;
+  let player2 = 0;
+  let hasNulls = false;
+
+  for (const combo of winningCombos){
+    combo.forEach((i) => {
+        if(board[i] !== null){
+          if(board[i] === 1)
+          {
+            player1++;
+          }
+          else{
+            player2++;
+          }
+        }
+        else{
+          hasNulls = true;
+        }
+      })
+
+      if(player1 === 3 || player2 ===3) break;
+      
+      player1 = 0;
+      player2 = 0;
+  };
+
+  return player1 === 3 ? '1' : player2 === 3 ? '-1' : hasNulls ? null : 'T';
 }
 // function checkGuess(guess){
 //   guessInput.value = ''
