@@ -35,7 +35,7 @@ let board = [], turn, winner;
 /*-------------------------------- Functions --------------------------------*/
 //init() // need an initialize function
 function init(){
-  board = [null, null, null, null, null, null, null, null, null];
+  board = [1, null, -1, -1, 1, null, 1, -1, null];
   turn = 1;
   winner = null;
   render();
@@ -47,14 +47,16 @@ function render(){
 
     if(currElement)
     {
-      if(currElement.innerText === '1'){
+      if(s === 1){
         currElement.style.color = 'yellow';
+        currElement.innerText = 'X';
       }
-      if(currElement.innerText === '-1'){
+      if(s === -1){
         currElement.style.color = 'red';
+        currElement.innerText = 'O';
       }
-      if(currElement.innerText === 'null'){
-        currElement.style.color = 'green';
+      if(s === null){
+        // do nothing currElement.style.color = 'green';
       }
     }
   });
