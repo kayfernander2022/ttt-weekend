@@ -1,14 +1,14 @@
 /*-------------------------------- Constants --------------------------------*/
 const squareEls = {
-  'sq0': document.getElementById('sq0'),
-  'sq1': document.getElementById('sq1'),
-  'sq2': document.getElementById('sq2'),
-  'sq3': document.getElementById('sq3'),
-  'sq4': document.getElementById('sq4'),
-  'sq5': document.getElementById('sq5'),
-  'sq6': document.getElementById('sq6'),
-  'sq7': document.getElementById('sq7'),
-  'sq8': document.getElementById('sq8')
+    0: document.getElementById('sq0'),
+    1: document.getElementById('sq1'),
+    2: document.getElementById('sq2'),
+    3: document.getElementById('sq3'),
+    4: document.getElementById('sq4'),
+    5: document.getElementById('sq5'),
+    6: document.getElementById('sq6'),
+    7: document.getElementById('sq7'),
+    8: document.getElementById('sq8')
 };
 const messageEl = document.getElementById('message');
 
@@ -16,7 +16,7 @@ console.dir(squareEls);
 console.dir(messageEl);
 /*---------------------------- Variables (state) ----------------------------*/
 //let secretNum, guessList, isWinner
-let board, turn, winner;
+let board = [], turn, winner;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -35,8 +35,29 @@ let board, turn, winner;
 /*-------------------------------- Functions --------------------------------*/
 //init() // need an initialize function
 function init(){
-  board = new [null, null, null, null, null, null, null, null, null];
+  board = [null, null, null, null, null, null, null, null, null];
+  turn = 1;
+  winner = null;
+  render();
+}
 
+function render(){
+  board.forEach((s, i) => {
+    let currElement = squareEls[i];
+
+    if(currElement)
+    {
+      if(currElement.innerText === '1'){
+        currElement.style.color = 'yellow';
+      }
+      if(currElement.innerText === '-1'){
+        currElement.style.color = 'red';
+      }
+      if(currElement.innerText === 'null'){
+        currElement.style.color = 'green';
+      }
+    }
+  });
 }
 
 // function checkGuess(guess){
