@@ -11,7 +11,7 @@ const squareEls = {
     8: document.getElementById('sq8')
 };
 const messageEl = document.getElementById('message');
-
+const winningCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 console.dir(squareEls);
 console.dir(messageEl);
 /*---------------------------- Variables (state) ----------------------------*/
@@ -49,15 +49,16 @@ function render(){
     if(currElement)
     {
       if(s === 1){
-        currElement.style.color = 'yellow';
+        currElement.style.backgroundColor = 'yellow';
         currElement.innerText = 'X';
       }
       if(s === -1){
-        currElement.style.color = 'red';
+        currElement.style.backgroundColor = 'red';
         currElement.innerText = 'O';
       }
       if(s === null){
-        // do nothing currElement.style.color = 'green';
+        currElement.style.backgroundColor = 'white';
+        currElement.innerText = '';
       }
     }
   });
