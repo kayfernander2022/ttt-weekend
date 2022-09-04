@@ -39,6 +39,7 @@ function init(){
   turn = 1;
   winner = null;
   render();
+  getMessage(winner);
 }
 
 function render(){
@@ -62,6 +63,20 @@ function render(){
   });
 }
 
+
+
+function getMessage(win){
+  let newMessage = win === null ? 
+  `It is now player ${getNextTurn() === 1 ? 'X' : 'O'} turn` : win === '1' ?
+  'Player X has won' : win === '-1' ? 'Player O has won' : 'There is a tie';
+
+  messageEl.innerText = newMessage;
+}
+
+function getNextTurn(){ 
+  turn = turn * -1;
+  return turn;
+}
 // function checkGuess(guess){
 //   guessInput.value = ''
 //   if (isNaN(guess) || guess < 1 || guess > 100) {
