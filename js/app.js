@@ -11,6 +11,7 @@ const squareEls = {
     8: document.getElementById('sq8')
 };
 const messageEl = document.getElementById('message');
+const resetBtnEl = document.getElementById('resetBtn');
 const winningCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 console.dir(squareEls);
 console.dir(messageEl);
@@ -41,6 +42,7 @@ function init(){
   render();
   getMessage();
   Object.values(squareEls).forEach((s) => s.addEventListener('click', handleClick));
+  resetBtnEl.addEventListener('click', init);
 }
 
 function render(){
@@ -81,7 +83,7 @@ function getNextTurn(){
 function handleClick(evt){
   const sqIdx = evt.target.id.replace('sq', '');
   
-  if(board[sqIdx] !== null){
+  if(board[sqIdx] !== null || winner != null){
     return;
   }
 
