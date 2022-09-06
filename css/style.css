@@ -1,5 +1,5 @@
 body {
-    background-color: gray;
+    background-color: lightgrey;
 	/* Use a system font, if none are available use an available sans-sarif   font */
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -7,6 +7,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  
 }
 
 section.board {
@@ -14,13 +15,18 @@ section.board {
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 div {
   border: 3px solid black;
-  font-size: 8vmin;
+  font-size: 7vmin;
   text-align: center;
   vertical-align: middle;
+  box-shadow: 8px 8px 1px 1px;
+  
 }
 
 #resetBtn{
@@ -28,4 +34,19 @@ div {
   font-weight: bold;
   font-size: medium;
   text-align: center;
+  background-color: yellow;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+h1{
+  font-size:75px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+h2{
+  margin-left: auto;
+  margin-right: auto;
+
 }

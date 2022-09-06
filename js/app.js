@@ -21,20 +21,14 @@ let board = [], turn, winner;
 
 
 /*------------------------ Cached Element References ------------------------*/
-// const form = document.querySelector("form")
-// const guessInput = document.querySelector("#guess-input")
-// const guessesEl = document.querySelector("#prev-guesses")
-// const messageEl = document.querySelector("#message")
-// const resetBtn = document.querySelector("#reset-button")
-// const prevGuessMsg = document.querySelector("#prev-guesses-msg")
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-//form.addEventListener('reset', init)
 
 /*-------------------------------- Functions --------------------------------*/
-//init() // need an initialize function
+
 function init(){
   board = [null, null, null, null, null, null, null, null, null];
   turn = 1;
@@ -52,11 +46,11 @@ function render(){
     if(currElement)
     {
       if(s === 1){
-        currElement.style.backgroundColor = 'yellow';
+        currElement.style.backgroundColor = 'purple';
         currElement.innerText = 'X';
       }
       if(s === -1){
-        currElement.style.backgroundColor = 'red';
+        currElement.style.backgroundColor = 'pink';
         currElement.innerText = 'O';
       }
       if(s === null){
@@ -65,7 +59,9 @@ function render(){
       }
     }
   });
+  
 }
+
 
 function getMessage(){
   let newMessage = winner === null ? 
@@ -73,6 +69,7 @@ function getMessage(){
   'Player X has won' : winner === '-1' ? 'Player O has won' : 'There is a tie';
 
   messageEl.innerText = newMessage;
+  
 }
 
 function getNextTurn(){ 
@@ -95,6 +92,7 @@ function handleClick(evt){
   if(winner !== null){
     getMessage();
     return;
+    
   }
 
   getNextTurn();
@@ -131,22 +129,14 @@ function getWinner(){
       player2 = 0;
   };
 
-  return player1 === 3 ? '1' : player2 === 3 ? '-1' : hasNulls ? null : 'T';
+  let result = player1 === 3 ? '1' : player2 === 3 ? '-1' : hasNulls ? null : 'T';
+  
+  if(result === '1' || result === '-1'){
+    confetti.start(2000);
+  }
+
+  return result;
 }
-// function checkGuess(guess){
-//   guessInput.value = ''
-//   if (isNaN(guess) || guess < 1 || guess > 100) {
-//     // we have an error!
-//     renderError('Whoops!  Please enter a number from 1 to 100!')
-//     // return something to short-circuit the function
-//     return
-//   } else if (guess === secretNum) {
-//     // we have a winner!
-//     // set isWinner to true
-//     isWinner = true
-//   }
-//   guessList.push(guess)
-//   render()
-// }
+
 
 init();
